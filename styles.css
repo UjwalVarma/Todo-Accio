@@ -1,0 +1,104 @@
+Resetting default margin and padding
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 80%; /* Set maximum width to 80% of the page size */
+  margin: 0 auto; /* Center the container horizontally */
+  padding: 20px;
+  box-sizing: border-box; /* Ensure padding is included in the width */
+}
+
+.full-width {
+  width: 100%;
+}
+
+#add-item {
+  padding: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.input-container {
+  display: flex;
+  flex-grow: 1;
+}
+
+.input-container input,
+.input-container select {
+  margin-right: 10px;
+  border: 2px solid #000;
+  padding: 5px;
+}
+
+.input-container button {
+  flex-shrink: 0;
+}
+
+#task-sections {
+  width: 100%;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Added to space elements evenly */
+}
+
+.task-item span {
+  flex: 55%; /* Item name takes up 40% */
+  margin-right: 20px; /* Added margin to create space between elements */
+}
+
+/* CSS for deadline */
+.deadline {
+  flex: 30%; /* Deadline takes up 30% */
+  margin-right: 20px; /* Added margin to create space between elements */
+}
+
+/* CSS for priority */
+.priority {
+  flex: 30%; /* Priority takes up 30% */
+  margin-right: 20px; /* Added margin to create space between elements */
+}
+
+
+.task-item .buttons {
+  flex: 30%; /* Buttons take up 30% */
+  display: flex; /* Added to align buttons horizontally */
+  justify-content: flex-end; /* Added to align buttons to the right */
+}
+
+.task-item .buttons i {
+  margin-left: 10px; /* Added margin to create space between icons */
+}
+
+#today-tasks-list,
+#future-tasks-list,
+#completed-tasks-list {
+  width: 100%;
+  margin-bottom: 20px;
+  background-color: black; /* Black background */
+  color: white; /* Text color */
+  padding: 20px; /* Padding */
+  border-radius: 10px; /* Curved edges */
+}
+
+/* Added black border to completed tasks */
+#completed-tasks-list {
+  border: 2px solid black; /* Black border */
+  background-color: white;
+  color: black;
+}
+
+.todo {
+  text-align: center; /* Center the todo list heading */
+}
+
+
+
+
