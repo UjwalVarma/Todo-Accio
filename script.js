@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", function() {
     displayTasks();
 });
 
+
+
 function addItem() {
     const name = document.getElementById("item-name").value;
     const date = document.getElementById("item-date").value;
@@ -121,3 +123,5 @@ function createTaskElement(task, index) {
 
     return item;
 }
+
+// This is final code
