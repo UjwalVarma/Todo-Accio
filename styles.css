@@ -23,6 +23,12 @@ html, body {
   width: 100%;
 }
 
+#add-item button {
+  background-color: black;
+  color: white;
+}
+
+
 .input-container {
   display: flex;
   flex-grow: 1;

@@ -16,6 +16,7 @@ function addItem() {
     displayTasks();
 }
 
+
 function deleteItem(index) {
     let todoList = JSON.parse(localStorage.getItem("todoList"));
     todoList.splice(index, 1);
@@ -34,14 +35,24 @@ function toggleCompleted(index) {
 
 function displayTasks() {
     const today = new Date();
-    const options = { year: '2-digit', month: '2-digit', day: '2-digit' };
-    const todayFormatted = today.toLocaleDateString('en-GB', options).replace(/\//g, '-');
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    const todayFormatted = today.toLocaleDateString('en-GB', options); // Format: "dd/mm/yyyy"
 
     let todoList = localStorage.getItem("todoList");
     todoList = todoList ? JSON.parse(todoList) : [];
 
-    const todayTasks = todoList.filter(task => task.date === todayFormatted && !task.completed);
-    const futureTasks = todoList.filter(task => new Date(task.date) > today || (new Date(task.date) === today && task.completed));
+    const todayTasks = todoList.filter(task => {
+        const taskDateParts = task.date.split('-');
+        const taskDate = new Date(taskDateParts[0], taskDateParts[1] - 1, taskDateParts[2]); // Adjust month index
+        return taskDate.toDateString() === today.toDateString() && !task.completed;
+    });
+
+    const futureTasks = todoList.filter(task => {
+        const taskDateParts = task.date.split('-');
+        const taskDate = new Date(taskDateParts[0], taskDateParts[1] - 1, taskDateParts[2]); // Adjust month index
+        return taskDate > today || (taskDate.toDateString() === today.toDateString() && task.completed);
+    });
+
     const completedTasks = todoList.filter(task => task.completed);
 
     const todayTasksList = document.getElementById("today-tasks-list");
@@ -66,6 +77,8 @@ function displayTasks() {
     });
 }
 
+
+
 function createTaskElement(task, index) {
     const item = document.createElement("div");
     item.classList.add("task-item");
@@ -75,11 +88,12 @@ function createTaskElement(task, index) {
     itemName.textContent = `${index + 1}. ${task.name}`;
     item.appendChild(itemName);
 
-    // Deadline
-    const deadline = document.createElement("span");
-    deadline.classList.add("deadline");
-    deadline.textContent = `Deadline: ${task.date}`;
-    item.appendChild(deadline);
+    // Date
+    const dateSpan = document.createElement("span");
+    const dateParts = task.date.split('-');
+    const formattedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
+    dateSpan.textContent = formattedDate;
+    item.appendChild(dateSpan);
 
     // Priority
     const priority = document.createElement("span");
