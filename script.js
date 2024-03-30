@@ -2,8 +2,6 @@ document.addEventListener("DOMContentLoaded", function() {
     displayTasks();
 });
 
-
-
 function addItem() {
     const name = document.getElementById("item-name").value;
     const date = document.getElementById("item-date").value;
@@ -18,14 +16,18 @@ function addItem() {
     displayTasks();
 }
 
-
 function deleteItem(index) {
     let todoList = JSON.parse(localStorage.getItem("todoList"));
-    todoList.splice(index, 1);
+    const deletedTask = todoList.splice(index, 1)[0]; // Remove task and store it
+    let deletedTasks = localStorage.getItem("deletedTasks");
+    deletedTasks = deletedTasks ? JSON.parse(deletedTasks) : [];
+    deletedTasks.push(deletedTask);
     localStorage.setItem("todoList", JSON.stringify(todoList));
+    localStorage.setItem("deletedTasks", JSON.stringify(deletedTasks));
 
     displayTasks();
 }
+
 
 function toggleCompleted(index) {
     let todoList = JSON.parse(localStorage.getItem("todoList"));
@@ -46,8 +48,10 @@ function displayTasks() {
     const todayTasks = todoList.filter(task => {
         const taskDateParts = task.date.split('-');
         const taskDate = new Date(taskDateParts[0], taskDateParts[1] - 1, taskDateParts[2]); // Adjust month index
-        return taskDate.toDateString() === today.toDateString() && !task.completed;
+        const todayWithoutTime = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+        return taskDate.getTime() <= todayWithoutTime.getTime() && !task.completed;
     });
+    
 
     const futureTasks = todoList.filter(task => {
         const taskDateParts = task.date.split('-');
@@ -61,6 +65,7 @@ function displayTasks() {
     todayTasksList.innerHTML = "";
     todayTasks.forEach((task, index) => {
         const item = createTaskElement(task, index);
+        item.classList.add("past-due"); // Add past-due class to tasks with past due date
         todayTasksList.appendChild(item);
     });
 
@@ -78,8 +83,6 @@ function displayTasks() {
         completedTasksList.appendChild(item);
     });
 }
-
-
 
 function createTaskElement(task, index) {
     const item = document.createElement("div");
@@ -123,5 +126,3 @@ function createTaskElement(task, index) {
 
     return item;
 }
-
-// This is final code

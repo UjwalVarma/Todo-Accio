@@ -1,4 +1,4 @@
-Resetting default margin and padding
+/* Resetting default margin and padding */
 html, body {
   margin: 0;
   padding: 0;
@@ -27,7 +27,6 @@ html, body {
   background-color: black;
   color: white;
 }
-
 
 .input-container {
   display: flex;
@@ -72,7 +71,6 @@ html, body {
   margin-right: 20px; /* Added margin to create space between elements */
 }
 
-
 .task-item .buttons {
   flex: 30%; /* Buttons take up 30% */
   display: flex; /* Added to align buttons horizontally */
@@ -81,6 +79,11 @@ html, body {
 
 .task-item .buttons i {
   margin-left: 10px; /* Added margin to create space between icons */
+}
+
+/* Added red border to tasks with past due date */
+.task-item.past-due {
+  border: 2px solid red;
 }
 
 #today-tasks-list,
@@ -104,7 +107,3 @@ html, body {
 .todo {
   text-align: center; /* Center the todo list heading */
 }
-
-
-/* Final Css */
-
