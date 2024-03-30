@@ -1,18 +1,23 @@
-/* Resetting default margin and padding */
 html, body {
   margin: 0;
   padding: 0;
 }
 
 .container {
-  max-width: 80%; /* Set maximum width to 80% of the page size */
-  margin: 0 auto; /* Center the container horizontally */
+  max-width: 80%; 
+  margin: 0 auto; 
   padding: 20px;
-  box-sizing: border-box; /* Ensure padding is included in the width */
+  box-sizing: border-box; 
 }
 
 .full-width {
   width: 100%;
+}
+
+.task-item{
+  background-color: black;
+  margin-top: 20px;
+  padding: 10px;
 }
 
 #add-item {
@@ -46,42 +51,40 @@ html, body {
 
 #task-sections {
   width: 100%;
+
 }
 
 .task-item {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Added to space elements evenly */
+  justify-content: space-between; 
 }
 
 .task-item span {
-  flex: 55%; /* Item name takes up 40% */
-  margin-right: 20px; /* Added margin to create space between elements */
+  flex: 55%; 
+  margin-right: 20px; 
 }
 
-/* CSS for deadline */
 .deadline {
-  flex: 30%; /* Deadline takes up 30% */
-  margin-right: 20px; /* Added margin to create space between elements */
+  flex: 30%; 
+  margin-right: 20px; 
 }
 
-/* CSS for priority */
 .priority {
-  flex: 30%; /* Priority takes up 30% */
-  margin-right: 20px; /* Added margin to create space between elements */
+  flex: 30%; 
+  margin-right: 20px; 
 }
 
 .task-item .buttons {
-  flex: 30%; /* Buttons take up 30% */
-  display: flex; /* Added to align buttons horizontally */
-  justify-content: flex-end; /* Added to align buttons to the right */
+  flex: 30%; 
+  display: flex; 
+  justify-content: flex-end; 
 }
 
 .task-item .buttons i {
-  margin-left: 10px; /* Added margin to create space between icons */
+  margin-left: 10px; 
 }
 
-/* Added red border to tasks with past due date */
 .task-item.past-due {
   border: 2px solid red;
 }
@@ -91,19 +94,18 @@ html, body {
 #completed-tasks-list {
   width: 100%;
   margin-bottom: 20px;
-  background-color: black; /* Black background */
-  color: white; /* Text color */
-  padding: 20px; /* Padding */
-  border-radius: 10px; /* Curved edges */
+  background-color: transparent; 
+  color: white; 
+  padding: 20px; 
+  border-radius: 10px; 
 }
 
-/* Added black border to completed tasks */
 #completed-tasks-list {
-  border: 2px solid black; /* Black border */
   background-color: white;
-  color: black;
+  color: white;
 }
 
 .todo {
-  text-align: center; /* Center the todo list heading */
+  text-align: center; 
 }
+

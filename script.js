@@ -18,7 +18,7 @@ function addItem() {
 
 function deleteItem(index) {
     let todoList = JSON.parse(localStorage.getItem("todoList"));
-    const deletedTask = todoList.splice(index, 1)[0]; // Remove task and store it
+    const deletedTask = todoList.splice(index, 1)[0]; 
     let deletedTasks = localStorage.getItem("deletedTasks");
     deletedTasks = deletedTasks ? JSON.parse(deletedTasks) : [];
     deletedTasks.push(deletedTask);
@@ -40,14 +40,13 @@ function toggleCompleted(index) {
 function displayTasks() {
     const today = new Date();
     const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-    const todayFormatted = today.toLocaleDateString('en-GB', options); // Format: "dd/mm/yyyy"
-
+    const todayFormatted = today.toLocaleDateString('en-GB', options); 
     let todoList = localStorage.getItem("todoList");
     todoList = todoList ? JSON.parse(todoList) : [];
 
     const todayTasks = todoList.filter(task => {
         const taskDateParts = task.date.split('-');
-        const taskDate = new Date(taskDateParts[0], taskDateParts[1] - 1, taskDateParts[2]); // Adjust month index
+        const taskDate = new Date(taskDateParts[0], taskDateParts[1] - 1, taskDateParts[2]); 
         const todayWithoutTime = new Date(today.getFullYear(), today.getMonth(), today.getDate());
         return taskDate.getTime() <= todayWithoutTime.getTime() && !task.completed;
     });
@@ -55,7 +54,7 @@ function displayTasks() {
 
     const futureTasks = todoList.filter(task => {
         const taskDateParts = task.date.split('-');
-        const taskDate = new Date(taskDateParts[0], taskDateParts[1] - 1, taskDateParts[2]); // Adjust month index
+        const taskDate = new Date(taskDateParts[0], taskDateParts[1] - 1, taskDateParts[2]); 
         return taskDate > today || (taskDate.toDateString() === today.toDateString() && task.completed);
     });
 
@@ -65,7 +64,7 @@ function displayTasks() {
     todayTasksList.innerHTML = "";
     todayTasks.forEach((task, index) => {
         const item = createTaskElement(task, index);
-        item.classList.add("past-due"); // Add past-due class to tasks with past due date
+        item.classList.add("past-due"); 
         todayTasksList.appendChild(item);
     });
 
@@ -88,38 +87,32 @@ function createTaskElement(task, index) {
     const item = document.createElement("div");
     item.classList.add("task-item");
 
-    // Item name
     const itemName = document.createElement("span");
     itemName.textContent = `${index + 1}. ${task.name}`;
     item.appendChild(itemName);
 
-    // Date
     const dateSpan = document.createElement("span");
     const dateParts = task.date.split('-');
     const formattedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
     dateSpan.textContent = formattedDate;
     item.appendChild(dateSpan);
 
-    // Priority
     const priority = document.createElement("span");
     priority.classList.add("priority");
     priority.textContent = `Priority: ${task.priority}`;
     item.appendChild(priority);
 
-    // Buttons
     const buttons = document.createElement("div");
     buttons.classList.add("buttons");
 
-    // Toggle completion icon
     const toggleIcon = document.createElement("i");
     toggleIcon.classList.add("fas", "fa-check");
     toggleIcon.addEventListener("click", () => toggleCompleted(index));
     buttons.appendChild(toggleIcon);
 
-    // Delete icon
     const deleteIcon = document.createElement("i");
     deleteIcon.classList.add("fas", "fa-trash-alt");
-    deleteIcon.addEventListener("click", () => deleteItem(index)); // Changed from "deleteItem()" to "deleteItem(index)"
+    deleteIcon.addEventListener("click", () => deleteItem(index)); 
     buttons.appendChild(deleteIcon);
 
     item.appendChild(buttons);
